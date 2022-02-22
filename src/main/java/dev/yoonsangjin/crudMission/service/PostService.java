@@ -47,11 +47,17 @@ public class PostService {
         this.boardRepository.update(boardId, targetBoard);
     }
 
-    public void deletePost(int boardId, int postId){
-        Board targetBoard = boardRepository.findById(boardId);
-        postRepository.delete(postId);
-        targetBoard.setPosts(postRepository.findAll());
-        this.boardRepository.update(boardId, targetBoard);
+    public void deletePost(int boardId, int postId, String pass){
+        if(pass.equals(postRepository.findById(postId).getPassword())){
+            Board targetBoard = boardRepository.findById(boardId);
+            postRepository.delete(postId);
+            targetBoard.setPosts(postRepository.findAll());
+            this.boardRepository.update(boardId, targetBoard);
+        }
+        else{
+            throw new RuntimeException("password fail");
+        }
+
     }
 
 }

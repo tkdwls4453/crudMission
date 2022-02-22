@@ -48,10 +48,11 @@ public class PostController {
         this.postService.updatePost(boardId,postId,post);
     }
 
-    @DeleteMapping("{boardId}/{postId}")
+    @DeleteMapping("{boardId}/{postId}/{pass}")
     public void deletePost(@PathVariable("boardId") int boardId,
-                           @PathVariable("postId") int postId
+                           @PathVariable("postId") int postId,
+                           @PathVariable("pass") String pass
     ){
-        this.postService.deletePost(boardId,postId);
+        this.postService.deletePost(boardId,postId,pass);
     }
 }
